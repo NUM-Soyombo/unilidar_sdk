@@ -9,6 +9,7 @@
 #include <errno.h>
 #include <termios.h>
 #include <unistd.h>
+#include <cmath>
 
 using namespace unitree_lidar_sdk;
 
@@ -81,7 +82,17 @@ int initSerialPort(const char* portName, int baudRate) {
     
     return serialPort;
 }
-
+// Corrected function to get yaw from quaternion
+float getYawFromQuaternion(const float quaternion[4]) {
+  // Extract yaw (rotation around z-axis) from quaternion
+  // Formula: atan2(2 * (w*z + x*y), 1 - 2 * (y*y + z*z))
+  float x = quaternion[0];
+  float y = quaternion[1];
+  float z = quaternion[2];
+  float w = quaternion[3];
+  
+  return atan2(2.0f * (w * z + x * y), 1.0f - 2.0f * (y * y + z * z));
+}
 // Function to send IMU data to STM32
 void sendIMUDataToSTM32(int serialPort, const IMUUnitree& imuData) {
     if (serialPort < 0) return;
@@ -94,7 +105,9 @@ void sendIMUDataToSTM32(int serialPort, const IMUUnitree& imuData) {
     // Header
     packet[0] = 0xAA;
     packet[1] = 0x55;
-    
+
+    // Calculate yaw from quaternion
+    float yaw = getYawFromQuaternion(imuData.quaternion);
     // Quaternion data (x, y, z, w)
     memcpy(&packet[2], &imuData.quaternion[0], 4);
     memcpy(&packet[6], &imuData.quaternion[1], 4);

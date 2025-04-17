@@ -21,13 +21,13 @@ int main(){
   }
 
   // Set Lidar Working Mode
-  // printf("Set Lidar working mode to: STANDBY ... \n");
-  // lreader->setLidarWorkingMode(STANDBY);
-  // sleep(1);
+  printf("Set Lidar working mode to: STANDBY ... \n");
+  lreader->setLidarWorkingMode(STANDBY);
+  sleep(1);
 
-  // printf("Set Lidar working mode to: NORMAL ... \n");
-  // lreader->setLidarWorkingMode(NORMAL);
-  // sleep(1);
+  printf("Set Lidar working mode to: NORMAL ... \n");
+  lreader->setLidarWorkingMode(NORMAL);
+  sleep(1);
 
   printf("\n");
 
@@ -44,19 +44,19 @@ int main(){
 
   // Check lidar dirty percentange
   int count_percentage = 0;
-  // while(true){
-  //   if( lreader->runParse() == AUXILIARY){
-  //     printf("Dirty Percentage = %f %%\n", lreader->getDirtyPercentage());
-  //     if (++count_percentage > 2){
-  //       break;
-  //     }
-  //     if (lreader->getDirtyPercentage() > 10){
-  //       printf("The protection cover is too dirty! Please clean it right now! Exit here ...\n");
-  //       exit(0);
-  //     }
-  //   }
-  //   usleep(500);
-  // }
+  while(true){
+    if( lreader->runParse() == AUXILIARY){
+      printf("Dirty Percentage = %f %%\n", lreader->getDirtyPercentage());
+      if (++count_percentage > 2){
+        break;
+      }
+      if (lreader->getDirtyPercentage() > 10){
+        printf("The protection cover is too dirty! Please clean it right now! Exit here ...\n");
+        exit(0);
+      }
+    }
+    usleep(500);
+  }
   printf("\n");
   sleep(2);
 
@@ -111,20 +111,20 @@ int main(){
       printf("\ttimedelay (us) = %d\n\n", lreader->getTimeDelay()); 
       break;
     
-    // case POINTCLOUD:
-    //   printf("A Cloud msg is parsed! \n");
-    //   printf("\tstamp = %f, id = %d\n", lreader->getCloud().stamp, lreader->getCloud().id);
-    //   printf("\tcloud size  = %ld, ringNum = %d\n", lreader->getCloud().points.size(), lreader->getCloud().ringNum);
-    //   printf("\tfirst 10 points (x,y,z,intensity,time,ring) = \n");
-    //   for (int i = 0; i< 10; i++){ // print the first 10 points
-    //     printf("\t  (%f, %f, %f, %f, %f, %d)\n", 
-    //         lreader->getCloud().points[i].x, 
-    //         lreader->getCloud().points[i].y, 
-    //         lreader->getCloud().points[i].z, 
-    //         lreader->getCloud().points[i].intensity, 
-    //         lreader->getCloud().points[i].time, 
-    //         lreader->getCloud().points[i].ring);
-    //   }
+    case POINTCLOUD:
+      printf("A Cloud msg is parsed! \n");
+      printf("\tstamp = %f, id = %d\n", lreader->getCloud().stamp, lreader->getCloud().id);
+      printf("\tcloud size  = %ld, ringNum = %d\n", lreader->getCloud().points.size(), lreader->getCloud().ringNum);
+      printf("\tfirst 10 points (x,y,z,intensity,time,ring) = \n");
+      for (int i = 0; i< 10; i++){ // print the first 10 points
+        printf("\t  (%f, %f, %f, %f, %f, %d)\n", 
+            lreader->getCloud().points[i].x, 
+            lreader->getCloud().points[i].y, 
+            lreader->getCloud().points[i].z, 
+            lreader->getCloud().points[i].intensity, 
+            lreader->getCloud().points[i].time, 
+            lreader->getCloud().points[i].ring);
+      }
       printf("\t  ...\n");
       printf("\ttimedelay (us) = %d\n\n", lreader->getTimeDelay()); 
       break;
