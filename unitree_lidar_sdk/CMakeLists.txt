@@ -32,3 +32,8 @@ add_executable(unilidar_subscriber_udp
   examples/unilidar_subscriber_udp.cpp
 )
 target_link_libraries(unilidar_subscriber_udp  libunitree_lidar_sdk.a )
+
+add_executable(main_project
+  examples/main_project.cpp
+)
+target_link_libraries(main_project  libunitree_lidar_sdk.a )
