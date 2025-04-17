@@ -10,3 +10,4 @@ unitree_lidar_ros2/log
 
 unitree_lidar_sdk/bin
 unitree_lidar_sdk/build
+.vscode 
