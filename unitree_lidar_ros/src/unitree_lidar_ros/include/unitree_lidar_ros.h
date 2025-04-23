@@ -131,7 +131,7 @@ public:
     }
     
 
-    lsdk_->setLidarWorkingMode(NORMAL);
+    lsdk_->setLidarWorkingMode(NORMAL); // change "STANDBY" mode: not moving lidar motor.You can use only imu sensor 
 
     // ROS
     nh_ = nh;

@@ -1,5 +1,8 @@
 # Unilidar SDK
 
+MODES:
+1. NORMAL -> IMU and PointCloud data.
+2. STANDBY -> Only IMU, motor is not rotating, It means POINT LIO is not working so you need make fake point cloud data in `if( result == IMU)`. 
 ## Introduction
 This repository is a SDK for [Unitree L1 LiDAR](https://www.unitree.com/LiDAR).
 
